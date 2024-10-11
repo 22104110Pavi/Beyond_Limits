@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Beyond Limits Courses - Fun and Colorful Learning for Everyone">
+    <title>Beyond Limits - Courses</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #ff9800;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 22px;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .course {
+            background-color: #e3f2fd;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 280px;
+            margin: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .course:hover {
+            transform: scale(1.1);
+        }
+
+        .course img {
+            width: 120px;
+            margin-top: 20px;
+        }
+
+        .course h3 {
+            font-size: 26px;
+            color: #ff5722;
+            margin: 10px 0;
+        }
+
+        .course p {
+            font-size: 18px;
+            color: #333;
+            padding: 0 20px 20px 20px;
+        }
+
+        .course button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .course button:hover {
+            background-color: #0288d1;
+        }
+
+        footer {
+            background-color: #ff9800;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .course {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Learn with Joy at Beyond Limits</h1>
+    <p>Interactive, Fun & Engaging Learning Experiences</p>
+</header>
+
+<main>
+    <div class="course" id="course-web-dev">
+        <img src="science.png" alt="Web Development Icon">
+        <h3>Science</h3>
+        <p>This course teaches Science Knowledge of science can empower disabled individuals to better understand their own conditions and the technologies that can assist them..</p>
+        <button onclick="showCourseDetails('Science', 'Learn to Empower the World with Science')">Start Learning</button>
+    </div>
+
+    <div class="course" id="course-sign-language">
+        <img src="images.png" alt="Language">
+        <h3>Language</h3>
+        <p>This course teaches you Language like English . Proficiency in language is crucial for educational achievements and career opportunities, ensuring equal participation in society..</p>
+        <button onclick="showCourseDetails('Language', 'Master the skills of communication through American Sign Language (ASL)!')">Start Learning</button>
+    </div>
+
+    <div class="course" id="course-art-tech">
+        <img src="art.png" alt="Art & Tech Icon">
+        <h3>Art & Technology</h3>
+        <p>Learn how to combine your creativity with technology to create digital art. Learn Art and through our Art ability forum you can sell your art.
+        </p>
+        <button onclick="showCourseDetails('Art & Technology', 'Explore the world of digital art with hands-on tools and techniques!')">Start Learning</button>
+    </div>
+</main>
+
+<!-- Course Details Popup -->
+<div id="course-details-modal" style="display: none; position: fixed; background-color: rgba(0, 0, 0, 0.7); top: 0; left: 0; width: 100%; height: 100%; justify-content: center; align-items: center;">
+    <div style="background-color: white; padding: 30px; border-radius: 10px; width: 300px; text-align: center;">
+        <h2 id="course-title">Course Title</h2>
+        <p id="course-description">Course Description</p>
+        <button onclick="closeModal()" style="background-color: #ff5722; color: white; border: none; padding: 10px 20px; border-radius: 10px; font-size: 16px;">Close</button>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Beyond Limits. Let's Learn Together!</p>
+</footer>
+
+<script>
+    // JavaScript to handle course details popup
+    function showCourseDetails(title, description) {
+        document.getElementById('course-title').innerText = title;
+        document.getElementById('course-description').innerText = description;
+        document.getElementById('course-details-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('course-details-modal').style.display = 'none';
+    }
+    
+    function startSpeechRecognition() {
+        if ('webkitSpeechRecognition' in window) {
+            var recognition = new webkitSpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.onresult = function(event) {
+                var userInput = event.results[0][0].transcript;
+                document.getElementById("userInput").value = userInput;
+            };
+            recognition.start();
+        } else {
+            alert('Your browser does not support speech recognition.');
+        }
+    }
+</script>
+<button onclick="startSpeechRecognition()">Start Voice Input</button>
+<input type="text" id="userInput" />
+
+
+</body>
+</html>
+
+
