@@ -13,3 +13,30 @@
 **Impact:**  
 Beyond Limits will improve learning outcomes, enhance accessibility, provide cognitive and emotional support, and foster social inclusion and empowerment for specially-abled students, preparing them for academic and personal success.
 
+1. System Architecture and Design
+The system is designed to provide a personalized learning platform for specially-abled students. It leverages AI-based adaptive learning to create customized experiences and integrates cloud services for scalability.
+
+Key Components:
+
+Frontend:
+
+Web interface (HTML, CSS, JavaScript)
+Mobile App (React Native or Flutter)
+Backend:
+
+Node.js/Flask APIs
+User Authentication
+Session Management
+AI Engine:
+
+TensorFlow for adaptive learning algorithms
+Data collection module for progress tracking
+Recommendation system (suggests content based on user behavior)
+Database and Storage:
+
+User Data and Course Content (SQL/NoSQL database)
+Cloud-based storage (Vultr) for media files and student artwork
+E-commerce Integration:
+
+Product catalog (student artwork)
+Payment Gateway (Razorpay, Stripe, or PayPal)
