@@ -45,6 +45,7 @@
             margin: 20px;
             text-align: center;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .course:hover {
@@ -66,22 +67,6 @@
             font-size: 18px;
             color: #333;
             padding: 0 20px 20px 20px;
-        }
-
-        .course button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 18px;
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .course button:hover {
-            background-color: #0288d1;
         }
 
         footer {
@@ -117,61 +102,51 @@
 </header>
 
 <main>
-    <div class="course" id="course-web-dev">
-        <img src="science.png" alt="Web Development Icon">
+    <div class="course" id="course-web-dev" onclick="window.location.href='science.html'">
+        <img src="science.png" alt="Science Icon">
         <h3>Science</h3>
-        <p>This course teaches Science Knowledge of science can empower disabled individuals to better understand their own conditions and the technologies that can assist them..</p>
-        <button onclick="showCourseDetails('Science', 'Learn to Empower the World with Science')">Start Learning</button>
+        <p>This course teaches Science Knowledge of science can empower disabled individuals to better understand their own conditions and the technologies that can assist them.</p>
     </div>
 
-    <div class="course" id="course-sign-language">
-        <img src="images.png" alt="Language">
+    <div class="course" id="course-sign-language" onclick="window.location.href='languages.html'">
+        <img src="images.png" alt="Language Icon">
         <h3>Language</h3>
-        <p>This course teaches you Language like English . Proficiency in language is crucial for educational achievements and career opportunities, ensuring equal participation in society..</p>
-        <button onclick="showCourseDetails('Language', 'Master the skills of communication through American Sign Language (ASL)!')">Start Learning</button>
+        <p>This course teaches you Language like English. Proficiency in language is crucial for educational achievements and career opportunities, ensuring equal participation in society.</p>
     </div>
 
-    <div class="course" id="course-art-tech">
+    <div class="course" id="course-art-tech" onclick="window.location.href='art.html'">
         <img src="art.png" alt="Art & Tech Icon">
         <h3>Art & Technology</h3>
-        <p>Learn how to combine your creativity with technology to create digital art. Learn Art and through our Art ability forum you can sell your art.
-        </p>
-        <button onclick="showCourseDetails('Art & Technology', 'Explore the world of digital art with hands-on tools and techniques!')">Start Learning</button>
+        <p>Learn how to combine your creativity with technology to create digital art. Learn Art and through our Art ability forum you can sell your art.</p>
     </div>
 </main>
-
-<!-- Course Details Popup -->
-<div id="course-details-modal" style="display: none; position: fixed; background-color: rgba(0, 0, 0, 0.7); top: 0; left: 0; width: 100%; height: 100%; justify-content: center; align-items: center;">
-    <div style="background-color: white; padding: 30px; border-radius: 10px; width: 300px; text-align: center;">
-        <h2 id="course-title">Course Title</h2>
-        <p id="course-description">Course Description</p>
-        <button onclick="closeModal()" style="background-color: #ff5722; color: white; border: none; padding: 10px 20px; border-radius: 10px; font-size: 16px;">Close</button>
-    </div>
-</div>
 
 <footer>
     <p>&copy; 2024 Beyond Limits. Let's Learn Together!</p>
 </footer>
 
 <script>
-    // JavaScript to handle course details popup
-    function showCourseDetails(title, description) {
-        document.getElementById('course-title').innerText = title;
-        document.getElementById('course-description').innerText = description;
-        document.getElementById('course-details-modal').style.display = 'flex';
-    }
-
-    function closeModal() {
-        document.getElementById('course-details-modal').style.display = 'none';
-    }
-    
+    // Start speech recognition for voice navigation
     function startSpeechRecognition() {
         if ('webkitSpeechRecognition' in window) {
             var recognition = new webkitSpeechRecognition();
             recognition.lang = 'en-US';
             recognition.onresult = function(event) {
-                var userInput = event.results[0][0].transcript;
-                document.getElementById("userInput").value = userInput;
+                var userInput = event.results[0][0].transcript.toLowerCase();
+
+                // Navigate based on voice commands
+                if (userInput.includes("science")) {
+                    window.location.href = 'science.html';
+                } else if (userInput.includes("language")) {
+                    window.location.href = 'languages.html';
+                } else if (userInput.includes("art")) {
+                    window.location.href = 'art.html';
+                } else {
+                    alert('No matching course found for your request: ' + userInput);
+                }
+            };
+            recognition.onerror = function(event) {
+                alert('Speech recognition error: ' + event.error);
             };
             recognition.start();
         } else {
@@ -179,11 +154,10 @@
         }
     }
 </script>
-<button onclick="startSpeechRecognition()">Start Voice Input</button>
-<input type="text" id="userInput" />
 
+<button onclick="startSpeechRecognition()" style="position: fixed; bottom: 20px; right: 20px;">Start Voice Input</button>
 
 </body>
-</html>
 
+</html>
 
