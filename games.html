@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Interaction</title>
+    <title>Game Hub</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-image: url('https://media.istockphoto.com/id/1130956744/vector/lets-play-neon-sign-bright-signboard-light-banner-game-symbol-emblem-and-label-neon-sign.jpg?s=612x612&w=0&k=20&c=Zl6ofgLFA0uMj98jXptASzxHqb9YG_pu5hF2VqVaBeQ=');
-            background-size: cover;
-            background-position: center;
+            font-family: 'Times', sans-serif;
+            background-image:url("https://as2.ftcdn.net/v2/jpg/04/42/21/53/1000_F_442215355_AjiR6ogucq3vPzjFAAEfwbPXYGqYVAap.jpg");
             color: white;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            
+            justify-content: center;
             margin: 0;
             padding: 20px;
             text-align: center;
@@ -18,73 +21,77 @@
         h1 {
             font-size: 3em;
             margin-bottom: 30px;
-            color: #ffcc00; /* Neon color */
+            color: royalblue;
         }
         .game-container {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
             gap: 20px;
             margin: 0 auto;
-            max-width: 1200px;
-        }
-        .game-box {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            width: 45%;
-            max-width: 600px;
-        }
-        .game-box iframe {
-            width: 100%;
-            height: 500px;
-            border: none;
-            border-radius: 5px;
+            max-width: 500px;
         }
         .game-button {
+            position: relative;
             display: inline-block;
-            padding: 15px 30px;
-            margin: 10px;
-            font-size: 1.2em;
-            color: white;
-            background: linear-gradient(45deg, #ff0081, #ff8c00);
+            width: 100%;
+            height: 150px;
+            background-size: cover;
+            background-position: center;
             border: none;
-            border-radius: 25px;
-            text-decoration: none;
-            text-align: center;
-            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
             cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
         .game-button:hover {
-            background: linear-gradient(45deg, #ff005c, #ff6f00);
             transform: scale(1.05);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+        .game-button span {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 1.5em;
+            padding: 10px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
         }
     </style>
-    <script>
-        function loadGame(game) {
-            const iframe = document.getElementById('game-frame');
-            if (game === 'sudoku') {
-                iframe.src = 'https://www.websudoku.com/';
-            } else if (game === 'tetris') {
-                iframe.src = 'https://tetris.com/play-tetris';
-            }
-        }
-    </script>
 </head>
 <body>
-    <h1>Game Interaction</h1>
+    <h1>Game Hub</h1>
     <div class="game-container">
-        <div class="game-box">
-            <h2>Games</h2>
-            <button onclick="loadGame('sudoku')" class="game-button">Play Sudoku</button>
-            <button onclick="loadGame('tetris')" class="game-button">Play Tetris</button>
-            <iframe id="game-frame" src="" title="Game Frame"></iframe>
-        </div>
+        <!-- Number Guess Game -->
+        <button 
+            class="game-button" 
+            style="background-image: url('https://t3.ftcdn.net/jpg/08/89/30/72/240_F_889307254_SmyEKNJ8yRAbBTQuH6sezxQBkuvbFhiN.jpg')"
+            onclick="window.location.href='numberguess.html'">
+            <span>Play Number Guess</span>
+        </button>
+
+        <!-- 2048 Game -->
+        <button 
+            class="game-button" 
+            style="background-image: url('https://t4.ftcdn.net/jpg/02/08/23/89/240_F_208238991_AJaBF2UyHOtCFUrkmqWjOuEsbJWppy5q.jpg');"
+            onclick="window.location.href='2048.html'">
+            <span>Play 2048</span>
+        </button>
+
+        <!-- Memory Game -->
+        <button 
+            class="game-button" 
+            style="background-image: url('https://t4.ftcdn.net/jpg/08/87/83/39/240_F_887833955_xXAlBWN31eCYIwzhdNtj8NTQlAApExgm.jpg');"
+            onclick="window.location.href='memorygame.html'">
+            <span>Play Memory Game</span>
+        </button>
     </div>
 </body>
 </html>
+
+
 
 
