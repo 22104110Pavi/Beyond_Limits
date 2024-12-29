@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art and Technology Courses</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Times, sans-serif;
+            background-color: #f2f4f8;
+        }
+        .header {
+            background-color: LIGHTBLUE;
+            color: black;
+            padding: 36px;
+            text-align: center;
+        }
+        .course-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .course-card:hover {
+            transform: scale(1.05);
+        }
+        .btn-enroll {
+            background-color: #007bf0;
+            color: white;
+        }
+        .btn-enroll:hover {
+            background-color: #0056b3;
+        }
+        .card-title {
+            color: #d81b60;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Art and Technology Courses</h1>
+        <p>Empowering specially-abled students with creativity and innovation</p>
+    </header>
+
+    <div class="container mt-4">
+        <div class="row g-4">
+            <!-- Course 1 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <img src="https://www.shutterstock.com/image-illustration/this-image-captures-essence-modern-600nw-2471502745.jpg" class="card-img-top" alt="Digital Art">
+                    <div class="card-body">
+                        <h5 class="card-title">Digital Art Basics</h5>
+                        <p class="card-text">Learn to create stunning digital illustrations using simple tools and techniques.</p>
+                        <button class="btn btn-enroll w-100" onclick="enrollCourse('Digital Art Basics')">Start Learning Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 2 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <img src="https://media.sketchfab.com/models/f349f107aac2443eb18482a477e21fa6/thumbnails/f12372587e3949fea505ded3beeb0898/c89cea34306840aeb954e44112006229.jpeg" class="card-img-top" alt="3D Modeling">
+                    <div class="card-body">
+                        <h5 class="card-title">3D Modeling</h5>
+                        <p class="card-text">Explore 3D modeling and animation for designing interactive objects and spaces.</p>
+                        <button class="btn btn-enroll w-100" onclick="enrollCourse('3D Modeling')">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 3 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <img src="https://thumbs.dreamstime.com/b/person-holding-tablet-technology-concept-young-business-working-shows-inscription-assistive-178710981.jpg" class="card-img-top" alt="Assistive Technology">
+                    <div class="card-body">
+                        <h5 class="card-title">Assistive Technology Design</h5>
+                        <p class="card-text">Learn to design and develop technologies to aid individuals with disabilities.</p>
+                        <button class="btn btn-enroll w-100" onclick="enrollCourse('Assistive Technology Design')">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 4 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <img src="https://supply.family/wp-content/uploads/2024/04/Example-1-Ps-main2-2-1465x980.jpg" class="card-img-top" alt="Graphic Design">
+                    <div class="card-body">
+                        <h5 class="card-title">Graphic Design Fundamentals</h5>
+                        <p class="card-text">Master the basics of graphic design to create impactful visual content.</p>
+                        <button class="btn btn-enroll w-100" onclick="enrollCourse('Graphic Design Fundamentals')">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 5 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <img src="https://t3.ftcdn.net/jpg/02/14/87/96/360_F_214879686_R3HFJlk6WLr1kcdvy6Q9rtNASKN0BZBS.jpg" class="card-img-top" alt="Web Development">
+                    <div class="card-body">
+                        <h5 class="card-title">Introduction to Web Development</h5>
+                        <p class="card-text">Learn to build responsive websites using HTML, CSS, and JavaScript.</p>
+                        <button class="btn btn-enroll w-100" onclick="enrollCourse('Introduction to Web Development')">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 6 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <img src="https://www.shutterstock.com/image-illustration/this-adorable-cartoon-depiction-features-600nw-2308962209.jpg" class="card-img-top" alt="Animation">
+                    <div class="card-body">
+                        <h5 class="card-title">Animation Basics</h5>
+                        <p class="card-text">Learn the fundamentals of creating captivating animations for digital media.</p>
+                        <button class="btn btn-enroll w-100" onclick="enrollCourse('Animation Basics')">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 7 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <img src="https://t4.ftcdn.net/jpg/02/94/40/59/240_F_294405902_nN7omxAzkSuTE3VEhUTwt0KoXILuHhPv.jpg" class="card-img-top" alt="Music Production">
+                    <div class="card-body">
+                        <h5 class="card-title">Music Production</h5>
+                        <p class="card-text">Discover the art of creating and editing music using digital tools.</p>
+                        <button class="btn btn-enroll w-100" onclick="enrollCourse('Music Production')">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 8 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <img src="https://t4.ftcdn.net/jpg/01/24/16/79/240_F_124167920_QuGqpdXjCkwkyI33hXPYa79RvYXBw0cD.jpg" class="card-img-top" alt="Photography">
+                    <div class="card-body">
+                        <h5 class="card-title">Photography Essentials</h5>
+                        <p class="card-text">Learn to capture stunning photographs and edit them professionally.</p>
+                        <button class="btn btn-enroll w-100" onclick="enrollCourse('Photography Essentials')">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 9 -->
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <img src="https://t3.ftcdn.net/jpg/05/52/65/02/240_F_552650237_eu29iQ7nTxe3WUlgHEP5sQlf5aj4as5Q.jpg" class="card-img-top" alt="AI in Arts">
+                    <div class="card-body">
+                        <h5 class="card-title">AI in Arts</h5>
+                        <p class="card-text">Explore how artificial intelligence is transforming creative industries.</p>
+                        <button class="btn btn-enroll w-100" onclick="enrollCourse('AI in Arts')">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center mt-5 py-3" style="background-color: lightblue;">
+        <p>© 2024 Beyond Limits. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function enrollCourse(courseName) {
+            alert(`You have successfully enrolled in ${courseName}!`);
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

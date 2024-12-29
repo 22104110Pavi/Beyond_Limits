@@ -1,0 +1,481 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Flip Card Memory Game</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Concert+One|Nova+Slim">
+  
+</head>
+<body>
+    <style>
+        html {
+  box-sizing: border-box;
+  background-color: rgb(145, 23, 185);
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Concert One', 'Coda', san-serif, cursive;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.score-table {
+  text-align: left;
+  width: 500px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.stars {
+  display: flex;
+  list-style: none;
+}
+
+.restart {
+  cursor: pointer;
+}
+
+.deck {
+  background: linear-gradient(135deg, rgba(207, 197, 229, 1) 0%, rgba(163, 154, 204, 1) 36%, rgba(79, 71, 169, 1) 100%);
+  margin: 0;
+  width: 612px;
+  min-height: 500px;
+  box-shadow: 10px 9px 31px 1px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.card {
+  transform: rotateY(0);
+  transition: 0.5s;
+  width: 125px;
+  height: 125px;
+  background: linear-gradient(to bottom, rgba(69, 72, 77, 1) 0%, rgba(0, 0, 0, 1) 100%);
+  box-shadow: 5px 5px 24px -3px rgba(0, 0, 0, 0.75);
+  border-radius: 8px;
+  font-size: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.show {
+  transform: rotateY(180deg);
+  transition: 0.5s;
+  background: skyblue;
+  font-size: 33px;
+  color: white;
+  cursor: default;
+}
+
+.match {
+  background: rgb(4, 172, 54);
+}
+
+.no-match {
+  background: rgb(175, 38, 38);
+  transition: 0.1s;
+}
+
+.modal {
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(241, 241, 241);
+  padding: 1rem 1.5rem;
+  width: 35rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.close-button {
+  float: right;
+  width: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  background-color: lightgray;
+}
+
+.close-button:hover {
+  background-color: darkgray;
+}
+
+.show-modal {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1.0);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.tick {
+  color: rgba(0, 218, 29, 0.767);
+  font-size: 60px;
+  margin-left: 35px;
+}
+
+.modal-heading {
+  letter-spacing: 2px;
+}
+
+.stats {
+  color: rgb(143, 143, 143);
+  margin-top: 30px;
+}
+
+.new-game {
+  background: rgb(75, 189, 0);
+  color: #fff;
+  border: 0;
+  padding: 1em 2em;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-top: 25px;
+}
+
+@media screen and (max-width: 600px) {
+  .deck {
+      width: 350px;
+      min-height: 280px;
+  }
+  .card {
+      width: 68px;
+      height: 68px;
+  }
+  .show{
+      font-size: 30px;
+  }
+  .modal-content {
+      width: 15rem;
+  }
+  .tick {
+      color: rgba(0, 218, 29, 0.767);
+      font-size: 45px;
+      margin-left: 25px;
+  }
+  h1 {
+      font-size: 20px;
+  }
+  h3 {
+      font-size: 16px;
+  }
+  .score-table {
+      width: 320px;
+  }
+}
+    </style>
+    <div class="container">
+        <header>
+            <h1 style="font-family:American Typewriter";>Card Matching Game</h1>
+        </header>
+
+        <section class="score-table">
+            <ul class="stars">
+                <li>
+                    <i id="star1" class="fa fa-star"></i>
+                </li>
+                <li>
+                    <i id="star2" class="fa fa-star"></i>
+                </li>
+                <li>
+                    <i id="star3" class="fa fa-star"></i>
+                </li>
+            </ul>
+            <span class="moves">Moves: 0</span>
+            <span class="timer">Elapsed Time: 0:00</span>
+            <div class="restart">
+                <i class="fa fa-repeat"></i>
+            </div>
+        </section>
+
+        <main>
+            <ul class="deck"></ul>
+        </main>
+
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close-button">x</span>
+                <i class="fa fa-check-circle tick"></i>
+                <h1 class="modal-heading">Congratulations! You Won!!</h1>
+                <h3 class="stats"></h3>
+                <button class="new-game">Play Again!</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+const modal = document.querySelector(".modal");
+const closeButton = document.querySelector(".close-button");
+
+function toggleModal() {
+  modal.classList.toggle("show-modal");
+}
+
+function windowOnClick(event) {
+  if (event.target === modal) {
+      toggleModal();
+  }
+}
+
+closeButton.addEventListener("click", toggleModal);
+window.addEventListener("click", windowOnClick);
+
+let cardTest = [];
+let cards = ["diamond", "diamond", "plane", "plane", "anchor", "anchor", "bolt", "bolt", "leaf", "leaf"
+  , "bicycle", "bicycle", "cube", "cube", "bomb", "bomb"];
+
+let shuffledCards = shuffle(cards);
+
+function createCards() {
+  for (let card of shuffledCards) {
+      const li = document.createElement("LI");
+      li.classList.toggle("card");
+      const i = document.createElement("i");
+      i.classList.toggle("fa");
+      if (card === "plane") {
+          i.classList.toggle("fa-paper-plane-o");
+      } else {
+          i.classList.toggle("fa-" + card);
+      }
+      const deck = document.querySelector('.deck');
+      li.appendChild(i);
+      deck.appendChild(li);
+
+  }
+}
+
+const ul = document.querySelector('.deck');
+let moves = document.querySelector(".moves");
+let movesCounter = 0;
+let stars = 3;
+let match = 0;
+let isfirstClick = true;
+let timerID;
+let isRestart = false;
+
+function initGame() {
+  createCards();
+  const card = document.querySelectorAll('.card');
+  for (let i = 0; i < card.length; i++) {
+      card[i].addEventListener("click", function (event) {
+          if (card[i] !== event.target) return;
+          if (event.target.classList.contains("show")) return;
+          if (isfirstClick) {
+              timerID = setInterval(timer, 1000);
+              isfirstClick = false;
+          }
+          showCard(event.target);
+          setTimeout(addCard, 550, shuffledCards[i], event.target, cardTest, i);
+      }, false);
+  }
+}
+
+function showCard(card) {
+  card.classList.add('show');
+
+}
+
+function addCard(card, cardHTML, testList, pos) {
+  if (isRestart) {
+      testList.length = 0;
+      isRestart = false;
+  }
+  testList.push(card);
+  testList.push(cardHTML)
+  testList.push(pos);
+  if (testList.length === 6) {
+      updateMoveCounter();
+      testCards(testList[0], testList[1], testList[2], testList[3], testList[4], testList[5]);
+      testList.length = 0;
+  }
+}
+
+function testCards(card1, html1, x1, card2, html2, x2) {
+  if (card1 === card2 && x1 != x2) {
+      cardsMatch(html1, html2);
+  } else {
+      cardsDontMatch(html1, html2);
+  }
+}
+
+function cardsMatch(card1, card2) {
+  card1.classList.add('match');
+  card2.classList.add('match');
+  match++;
+  if (match === 8) {
+      win();
+  }
+}
+
+function cardsDontMatch(card1, card2) {
+  card1.classList.toggle('no-match');
+  card2.classList.toggle('no-match');
+  setTimeout(function () {
+      card1.classList.toggle('no-match');
+      card2.classList.toggle('no-match');
+      card1.classList.toggle('show');
+      card2.classList.toggle('show');
+
+  }, 300);
+}
+
+function win() {
+  clearInterval(timerID);
+  toggleModal();
+  const stats = document.querySelector(".stats");
+  if (s % 60 < 10) {
+      stats.textContent = "You won with: " + stars + " stars in " + movesCounter + " moves with time: " + m + ":0" + s % 60;
+  } else {
+      stats.textContent = "You won with: " + stars + " stars in " + movesCounter + " moves with time: " + m + ":" + s % 60;
+  }
+}
+
+function updateMoveCounter() {
+  movesCounter++;
+  moves.textContent = "Moves: " + movesCounter;
+  if (movesCounter === 13) {
+      let star = document.querySelector("#star3");
+      star.classList.toggle("fa-star");
+      star.classList.add("fa-star-o");
+      stars--;
+  } else if (movesCounter === 25) {
+      let star = document.querySelector("#star2");
+      star.classList.toggle("fa-star");
+      star.classList.add("fa-star-o");
+      stars--;
+  } else if (movesCounter === 35) {
+      let star = document.querySelector("#star1");
+      star.classList.toggle("fa-star");
+      star.classList.add("fa-star-o");
+      stars--;
+  }
+}
+
+let s = 0;
+let m = 0;
+function timer() {
+  ++s;
+  m = Math.floor(s / 60);
+  let timer = document.querySelector(".timer");
+  if (s % 60 < 10) {
+      timer.textContent = "Elapsed Time: " + m + ":0" + s % 60;
+  } else {
+      timer.textContent = "Elapsed Time: " + m + ":" + s % 60;
+  }
+
+}
+
+let restart = document.querySelector(".restart");
+restart.addEventListener("click", restartGame, false);
+function restartGame() {
+  clearInterval(timerID);
+  movesCounter = 0;
+  match = 0;
+  s = 0;
+  m = 0;
+  isfirstClick = true;
+  isRestart = true;
+  const deck = document.querySelector('.deck');
+  var elements = deck.getElementsByClassName("card");
+
+  while (elements[0]) {
+      elements[0].parentNode.removeChild(elements[0]);
+  }
+  shuffledCards = shuffle(cards);
+  let timer = document.querySelector(".timer");
+  timer.textContent = "Elapsed Time: 0:00";
+  moves.textContent = "Moves: " + movesCounter;
+
+  resetStars();
+  initGame();
+}
+
+function resetStars() {
+  stars = 3;
+  let star = document.querySelector("#star3");
+  star.classList.remove("fa-star");
+  star.classList.remove("fa-star-o");
+  star.classList.add("fa-star");
+
+  star = document.querySelector("#star2");
+  star.classList.remove("fa-star");
+  star.classList.remove("fa-star-o");
+  star.classList.add("fa-star");
+
+  star = document.querySelector("#star1");
+  star.classList.remove("fa-star");
+  star.classList.remove("fa-star-o");
+  star.classList.add("fa-star");
+}
+
+const newGameButton = document.querySelector(".new-game");
+newGameButton.addEventListener("click", newGame);
+function newGame() {
+  toggleModal();
+  restartGame();
+}
+
+initGame();
+    </script>
+</body>
+</html>
