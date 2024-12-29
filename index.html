@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beyond Limits Home Page</title>
@@ -74,67 +74,8 @@
         .quote:hover {
             color: #ff00ff;
         }
-       
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input,
-        .form-group select {
-            width: 90%;
-            padding: 9px;
-            border: 1px solid #6e0ae0;
-            border-radius: 5px;
-        }
-        .form-group button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .form-group button:hover {
-            background-color: #0056b3;
-        }
+
+        /* Modal functionality and other UI elements omitted for brevity */
     </style>
 </head>
 <body>
@@ -143,98 +84,94 @@
             <h1>Beyond Limits</h1>
             <p>Empowering Specially-Abled Students through Innovative Education</p>
             <div class="buttons">
-                <a href="#" class="button" id="openModal">User Registration</a>
+                <a href="userreg.html" class="button">User Registration</a>
                 <a href="artability.html" class="button">Art Ability</a>
-                <a href="games.html" class="button">Game Interaction</a>
-                <a href="courses.html" class="button"> Explore Courses</a> <!-- New Courses Button -->
+                <a href="games.html" class="button">Play games</a>
+                <a href="courses.html" class="button">Explore Courses</a>
             </div>
-            <p class="quote" onclick="glowQuote()">"The only limit to our realization of tomorrow is our doubts of today." - Franklin D. Roosevelt</p>
+            <h4 class="quote" onclick="glowQuote()">"The only limit to our realization of tomorrow is our doubts of today.-- Franklin D. Roosevelt"</h4>
         </div>
     </div>
-    
-  
 
     <!-- Audio -->
-    <audio id="bg-audio" controls>
+    <audio controls autoplay>
         <source src="intro.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
-    
-    <!-- Modal -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>User Registration</h2>
-            <form id="registrationForm">
-                <div class="form-group">
-                    <label for="fname">First Name:</label>
-                    <input type="text" id="fname" name="firstname" required>
-                </div>
-                <div class="form-group">
-                    <label for="lname">Last Name:</label>
-                    <input type="text" id="lname" name="lastname" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <div class="form-group">
-                    <label for="country">Country:</label>
-                    <select id="country" name="country" required>
-                        <option value="">Select your country</option>
-                        <option value="us">United States</option>
-                        <option value="in">India</option>
-                        <option value="uk">United Kingdom</option>
-                        <option value="japan">Japan</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">I agree to the terms and conditions</label>
-                </div>
-                <div class="form-group">
-                    <button type="submit">Register</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    
+
     <script>
-        // Audio interaction
-        var audio = document.getElementById('bg-audio');
-        document.addEventListener('keydown', function(event) {
-            if (event.code === 'Space' || event.keyCode === 32) {
-                if (audio.paused) {
-                    audio.play();
-                }
-                document.removeEventListener('keydown', arguments.callee);
+        // Automatically start speech recognition when page loads
+        window.onload = function() {
+            startSpeechRecognition();
+        };
+
+        // Start speech recognition for voice navigation
+        function startSpeechRecognition() {
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                recognition.lang = 'en-US';
+
+                recognition.onresult = function(event) {
+                    var userInput = event.results[0][0].transcript.toLowerCase();
+
+                    // Navigate based on voice commands
+                    if (userInput.includes("register")) {
+                        window.location.href = 'userreg.html';
+                    }
+                     else if (userInput.includes("registration")) {
+                        window.location.href = 'userreg.html';
+                    }
+                    else if (userInput.includes("art")) {
+                        window.location.href = 'artability.html';
+                    }
+                    else if (userInput.includes("art ability")) {
+                        window.location.href = 'artability.html';
+                    }
+                    else if (userInput.includes("game")) {
+                        window.location.href = 'games.html';
+                    }
+                     else if (userInput.includes("play games")) {
+                        window.location.href = 'games.html';
+                    } else if (userInput.includes("courses")) {
+                        window.location.href = 'courses.html';
+                    } else if (userInput.includes("course")) {
+                        window.location.href = 'courses.html';
+                    }
+                    else if(userInput.includes("home"))
+                    {
+                        window.location.href = 'BeyondLimitsHomePage.html';
+                    }
+                    else if(userInput.include("resume science")){
+                        window.location.href='science.html';
+                       
+                    }
+                   else if (userInput.includes("science")) {
+                    window.location.href = 'science.html';
+                } else if (userInput.includes("english")) {
+                    window.location.href = 'languages.html';
+                } else if (userInput.includes("art")) {
+                    window.location.href = 'art.html';
+                } else if (userInput.includes("technology")) {
+                    window.location.href = 'art.html';
+                } else if(userInput.includes("home"))
+                    {
+                        window.location.href = 'BeyondLimitsHomePage.html';
+                    }
+                    else {
+                        alert('No matching command for your request: ' + userInput);
+                    }
+                };
+
+                recognition.onerror = function(event) {
+                    alert('Speech recognition error: ' + event.error);
+                };
+
+                recognition.start();
+            } else {
+                alert('Your browser does not support speech recognition.');
             }
-        });
-
-        // Modal functionality
-        const modal = document.getElementById('myModal');
-        const btn = document.getElementById('openModal');
-        const span = document.getElementsByClassName('close')[0];
-
-        btn.onclick = function() {
-            modal.style.display = 'flex';
         }
 
-        span.onclick = function() {
-            modal.style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
-
-      
         // Quote glow effect
         function glowQuote() {
             document.querySelector('.quote').style.color = '#ff00ff';
