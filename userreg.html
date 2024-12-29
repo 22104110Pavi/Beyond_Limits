@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration for First-Time Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('useregimg.jpg'); /* Set background image */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6); /* semi-transparent background */
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #333;
+            box-sizing: border-box; /* Ensures padding and border are included in the width calculation */
+        }
+
+        button.btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box; /* Ensures button width doesn't overflow */
+        }
+
+        button.btn:hover {
+            background-color: #45a049;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 style="background:powderblue">User Registration</h2>
+        <p>✨🎉 It is Recommended to take help while registering for the very First Time 
+            Specify the Type of Disability or Disorder.✨🎉 
+        </p>
+        <form id="registrationForm">
+            <!-- Personal Information -->
+            <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone *</label>
+                <input type="tel" id="phone" name="phone" placeholder="+91 81234 56789" required>
+            </div>
+
+            <!-- Address Information -->
+            <div class="form-group">
+                <label for="address">Address Line 1 *</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="city">City / District *</label>
+                <input type="text" id="city" name="city" required>
+            </div>
+
+            <div class="form-group">
+                <label for="state">State / Province *</label>
+                <input type="text" id="state" name="state" required>
+            </div>
+
+            <div class="form-group">
+                <label for="postalCode">Postal Code *</label>
+                <input type="text" id="postalCode" name="postalCode" required>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country *</label>
+                <input type="text" id="country" name="country" required>
+            </div>
+
+            <!-- Disability Type -->
+            <div class="form-group">
+                <label for="disability">Disability Type *</label>
+                <select id="disability" name="disability" required>
+                    <option value="Deaf-Blindness">Deaf-Blindness</option>
+                    <option value="Autism">Autism</option>
+                    <option value="Physical Disabilities">Physical Disabilities</option>
+                    <option value="Speech or Language Impairment">Speech or Language Impairment</option>
+                    <option value="Visually Impaired">Visually Impaired</option>
+                    <option value="Hearing Impaired">Hearing Impaired</option>
+                    <option value="Mental Disability">Mental Disability</option>
+                    <option value="ADHD">ADHD</option>
+                </select>
+            </div>
+
+            <!-- File Upload for Blind Students -->
+            <div class="form-group">
+                <label for="fileUpload">Tell Your User Details (For Blind People)</label>
+                <input type="file" id="fileUpload" name="fileUpload">
+            </div>
+
+            <div class="form-group">
+                <p>If Anyone is registering for blind students, enable the Text-to-Speech extension for them! It is available in Chrome, Firefox, and all browsers🦋</p>
+                <p>AI Guide for Blind People is Coming Soon!</p>
+                <p>🎉✨ Thank you for registering. Take Courses from Explore Courses Section.🎉✨</p>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn">Register</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("disability").addEventListener("change", function() {
+            let disabilityType = this.value;
+            console.log("Selected Disability Type: " + disabilityType);
+        });
+
+        // Handle form submission
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Collect form data
+            let formData = new FormData(this);
+
+            // Show a confirmation message (for demo purposes)
+            alert("Registration submitted successfully!");
+
+            // Example: Log the form data (optional)
+            for (let [key, value] of formData.entries()) {
+                console.log(key, value);
+            }
+
+            // Reset the form after submission
+            this.reset();
+        });
+    </script>
+</body>
+</html>
