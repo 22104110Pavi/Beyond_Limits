@@ -126,10 +126,15 @@
 </footer>
 
 <script>
-    // Start speech recognition for voice navigation
+    // Start speech recognition for voice navigation automatically on page load
+    window.onload = function() {
+        startSpeechRecognition();
+    };
+
+    // Start speech recognition
     function startSpeechRecognition() {
-        if ('webkitSpeechRecognition' in window) {
-            var recognition = new webkitSpeechRecognition();
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
             recognition.lang = 'en-US';
             recognition.onresult = function(event) {
                 var userInput = event.results[0][0].transcript.toLowerCase();
@@ -137,17 +142,21 @@
                 // Navigate based on voice commands
                 if (userInput.includes("science")) {
                     window.location.href = 'science.html';
-                } else if (userInput.includes("language")) {
+                } else if (userInput.includes("english")) {
                     window.location.href = 'languages.html';
                 } else if (userInput.includes("art")) {
+                    window.location.href = 'art.html';
+                } else if (userInput.includes("technology")) {
                     window.location.href = 'art.html';
                 } else {
                     alert('No matching course found for your request: ' + userInput);
                 }
             };
+
             recognition.onerror = function(event) {
                 alert('Speech recognition error: ' + event.error);
             };
+            
             recognition.start();
         } else {
             alert('Your browser does not support speech recognition.');
@@ -155,9 +164,5 @@
     }
 </script>
 
-<button onclick="startSpeechRecognition()" style="position: fixed; bottom: 20px; right: 20px;">Start Voice Input</button>
-
 </body>
-
 </html>
-
